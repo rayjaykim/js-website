@@ -14,12 +14,40 @@
 
 <body>
   <main class="site-wrapper">
-    <header>
-      <nav>
-        
+    <header class="site-header">
+      <nav class="navbar">
+        <div class="brand-logo">
+          <a href="/"><h2>folio.</h2></a>
+        </div>
+        <div class="navbar-nav">
+          <ul class="ul-defaults-none main-menu">
+            <li class="nav-item">Home</li>
+            <li class="nav-item">About Me</li>
+            <li class="nav-item">Contact</li>
+          </ul>
+        </div>
       </nav>
     </header>
   </main>
+
+  <div class="full-site-modal page-block is-visible">
+    <header class="modal-header">
+      <h3>ABOUT PAGE</h3>
+      <i class="fas fa-times"></i>
+    </header>
+    <div class="modal-body">
+      <div>
+        <img src="./assets/images/img4.jpg" alt="headshot">
+      </div>
+      <h2>Raymond Kim</h2>
+      <p>text 1</p>
+      <p>text 2</p>
+      <div>
+        <div>Email Me:</div>
+        <a href="mailto:rayjaykim@gmail.com">rayjaykim@gmail.com</a>
+      </div>
+    </div>
+  </div>
 
   <script src="./js/main.js"></script>
 </body>
