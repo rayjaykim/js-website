@@ -22,23 +22,24 @@ const portfolioGrid = '.portfolio-grid';
 const divStart = document.querySelector(portfolioGrid);
 
 const portfolioArray = [
-  ['web', 'Web Development', 'Food Website', "./assets/images/portfolio-1.jpg"],
-  ['web', 'Web Development', 'Skate Website', "./assets/images/portfolio-2.jpg"],
-  ['web', 'Web Development', 'Eating Website', "./assets/images/portfolio-3.jpg"],
-  ['ui', 'UI Design', 'Cool Design', "./assets/images/portfolio-4.jpg"],
-  ['app', 'App Development', 'Game App', "./assets/images/portfolio-5.jpg"],
-  ['app', 'App Development', 'Gambling App', "./assets/images/portfolio-6.jpg"],
-  ['app', 'App Development', 'Money App', "./assets/images/portfolio-7.jpg"],
-  ['ui', 'UI Design', 'Fantastic Design', "./assets/images/portfolio-8.jpg"]
+  ['web', 'Web Development', 'Food Website', "./assets/images/portfolio-1.jpg", "web-1", "Web Project 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras tincidunt lobortis feugiat vivamus at augue eget arcu."],
+  ['web', 'Web Development', 'Skate Website', "./assets/images/portfolio-2.jpg", "web-2", "Web Project 2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquet enim tortor at auctor urna nunc id cursus."],
+  ['web', 'Web Development', 'Eating Website', "./assets/images/portfolio-3.jpg", "web-3", "Web Project 3", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Adipiscing elit pellentesque habitant morbi tristique senectus et."],
+  ['ui', 'UI Design', 'Cool Design', "./assets/images/portfolio-4.jpg", "ui-1", "UI Project 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Orci phasellus egestas tellus rutrum tellus pellentesque."],
+  ['app', 'App Development', 'Game App', "./assets/images/portfolio-5.jpg", "app-1", "App Project 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus mattis molestie a iaculis at."],
+  ['app', 'App Development', 'Gambling App', "./assets/images/portfolio-6.jpg", "app-2", "App Project 2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh praesent tristique magna sit amet purus gravida quis blandit."],
+  ['app', 'App Development', 'Money App', "./assets/images/portfolio-7.jpg", "app-3", "App Project 3", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique senectus et netus et malesuada fames ac turpis."],
+  ['ui', 'UI Design', 'Fantastic Design', "./assets/images/portfolio-8.jpg", "ui-2", "UI Project 2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Velit scelerisque in dictum non consectetur a."]
 ]
 portfolioArray.forEach(element => {
-  document.body.onload = addElement(element);
+  document.body.onload = addModal(element);
 });
 
-function addElement(item) {
+function addModal(item) {
   const newDiv = document.createElement("div");
   newDiv.className = "portfolio-card";
   newDiv.dataset.item = item[0];
+  newDiv.dataset.open = item[4];
   divStart.appendChild(newDiv);
   
   const newDiv1 = document.createElement("div");
@@ -49,8 +50,7 @@ function addElement(item) {
   img.src = item[3];
   newDiv1.appendChild(img);
 
-  const link = document.createElement("a");
-  link.href = "#";
+  const link = document.createElement("div");
   link.className = "card-popup-box";
   newDiv1.appendChild(link);
 
@@ -63,6 +63,63 @@ function addElement(item) {
   const content1 = document.createTextNode(item[2]);
   h3Content.appendChild(content1);
   link.appendChild(h3Content);
+}
+
+const popup = '.popUp'
+
+const PopUpStart = document.querySelector(popup);
+
+portfolioArray.forEach(element => {
+  document.body.onload = fillModal(element);
+})
+
+function fillModal(item) {
+  const newDiv = document.createElement("div");
+  newDiv.id = item[4];
+  newDiv.className = "modal";
+  newDiv.dataset.animation = "slideInOutTop";
+  PopUpStart.appendChild(newDiv);
+
+  const newDiv1 = document.createElement("div");
+  newDiv1.className = "modal-dialogue";
+  newDiv.appendChild(newDiv1);
+
+  const head = document.createElement("header");
+  head.className = "modal-header";
+  newDiv1.appendChild(head);
+
+  const title = document.createElement("h3");
+  head.appendChild(title);
+  const titleText = document.createTextNode(item[5]);
+  title.appendChild(titleText);
+  const exit = document.createElement("i");
+  exit.className = "fas fa-times";
+  exit.dataset.close;
+  head.appendChild(exit);
+
+  const newDiv2 = document.createElement("div");
+  newDiv2.className = "modal-body";
+  newDiv1.appendChild(newDiv2);
+
+  const imgDiv = document.createElement("div");
+  imgDiv.className = "img-wrapper";
+  newDiv2.appendChild(imgDiv);
+  const img = document.createElement("img");
+  img.src = item[3];
+  imgDiv.appendChild(img);
+
+  const textDiv = document.createElement("div");
+  textDiv.className = "text-wrapper";
+  newDiv2.appendChild(textDiv);
+  const text = document.createElement("p");
+  const strong = document.createElement("strong");
+  const textStrong = document.createTextNode(item[2]);
+  strong.appendChild(textStrong);
+  text.appendChild(strong);
+  textDiv.appendChild(text);
+  
+  const details = document.createTextNode(item[6]);
+  textDiv.appendChild(details);
 }
 
 /* Theme */
@@ -152,7 +209,7 @@ for (const link of filterLink) {
 }
 
 
-// Full Site Modal "open buttons"
+// Full Site Modal and Modal "open buttons"
 for (const elm of openModal) {
   elm.addEventListener('click', function() {
     const modalId = this.dataset.open;
@@ -162,6 +219,20 @@ for (const elm of openModal) {
 
 for (const elm of closeModal) {
   elm.addEventListener('click', function() {
-    this.parentElement.parentElement.classList.remove(isVisible);
+    this.parentElement.parentElement.parentElement.classList.remove(isVisible);
   })
 }
+
+// Modal
+document.addEventListener('click', (e) => {
+  if (e.target === document.querySelector('.modal.is-visible')) {
+    document.querySelector('.modal.is-visible').classList.remove(isVisible);
+  }
+})
+
+document.addEventListener('keyup', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelector('.modal.is-visible').classList.remove(isVisible);
+  }
+})
+
