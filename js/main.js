@@ -94,7 +94,7 @@ function fillModal(item) {
   title.appendChild(titleText);
   const exit = document.createElement("i");
   exit.className = "fas fa-times";
-  exit.dataset.close;
+  exit.dataset.close = '';
   head.appendChild(exit);
 
   const newDiv2 = document.createElement("div");
@@ -211,7 +211,7 @@ for (const link of filterLink) {
 
 // Full Site Modal and Modal "open buttons"
 for (const elm of openModal) {
-  elm.addEventListener('click', function() {
+  elm.addEventListener('click', function(e) {
     const modalId = this.dataset.open;
     document.getElementById(modalId).classList.add(isVisible);
   })
